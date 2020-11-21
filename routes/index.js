@@ -1,23 +1,27 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const controller = require('../controller')
 
-/* GET home page. */
-router.get('/', );
+router.get('/', controller.index);
 
-router.get('/login', );
+router.get('/login', controller.login_get);
 
-router.post('/login', );
+router.post('/login', controller.login_post);
 
-router.get('/signup', );
+router.get('/signup', controller.signup_get);
 
-router.post('/signup', );
+router.post('/signup', controller.signup_post);
 
-router.get('/membership', );
+router.get('/membership', controller.membership_get);
 
-router.post('/membership', );
+router.post('/membership', controller.membership_post);
 
-router.get('/new', );
+router.get('/create', controller.create_get);
 
-router.post('/new', );
+router.post('/create', controller.create_post);
+
+router.get('/message/:id/delete', controller.delete_get);
+
+router.post('/message/:id/delete', controller.delete_post);
 
 module.exports = router;
