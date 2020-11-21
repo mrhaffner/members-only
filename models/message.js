@@ -9,7 +9,7 @@ const MessageSchema = new Schema({
     author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
 });
 
-UserSchema.virtual('url').get(function() {
+MessageSchema.virtual('url').get(function() {
     //UPDATE ROUTE
     return `/blah/message${this.id}`
 });

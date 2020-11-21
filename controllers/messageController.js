@@ -1,10 +1,10 @@
-const { body, validationResult } = require('express-validator')
+//const { body, validationResult } = require('express-validator')
 //probably need to install this - do I need it?
-const Message = require('/models/message');
-const User = require('/models/user');
+const Message = require('../models/message');
+const User = require('../models/user');
 
 exports.index = function(req, res, next) {
-    res.send('NOT IMPLEMENTED');
+    res.render('index', { title: 'Members Only' });
 };
 
 exports.create_get = function(req, res, next) {

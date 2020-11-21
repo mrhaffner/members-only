@@ -1,7 +1,7 @@
 //const { body, validationResult } = require('express-validator')
 //probably need to install this - do I need it?
-const Message = require('/models/message');
-const User = require('/models/user');
+const Message = require('../models/message');
+const User = require('../models/user');
 
 exports.login_get = function(req, res, next) {
     res.send('NOT IMPLEMENTED');

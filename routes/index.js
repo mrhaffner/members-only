@@ -1,27 +1,28 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('../controller')
+const msg_controller = require('../controllers/messageController')
+const user_controller = require('../controllers/userController')
 
-router.get('/', controller.index);
+router.get('/', msg_controller.index);
 
-router.get('/login', controller.login_get);
+router.get('/login', user_controller.login_get);
 
-router.post('/login', controller.login_post);
+router.post('/login', user_controller.login_post);
 
-router.get('/signup', controller.signup_get);
+router.get('/signup', user_controller.signup_get);
 
-router.post('/signup', controller.signup_post);
+router.post('/signup', user_controller.signup_post);
 
-router.get('/membership', controller.membership_get);
+router.get('/membership', user_controller.membership_get);
 
-router.post('/membership', controller.membership_post);
+router.post('/membership', user_controller.membership_post);
 
-router.get('/create', controller.create_get);
+router.get('/create', msg_controller.create_get);
 
-router.post('/create', controller.create_post);
+router.post('/create', msg_controller.create_post);
 
-router.get('/message/:id/delete', controller.delete_get);
+router.get('/message/:id/delete', msg_controller.delete_get);
 
-router.post('/message/:id/delete', controller.delete_post);
+router.post('/message/:id/delete', msg_controller.delete_post);
 
 module.exports = router;
