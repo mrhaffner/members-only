@@ -2,4 +2,13 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  
+  ul 
+    - message_list.sort((a,b) => b.date - a.date);
+    each message in message_list
+      h3 #{message.title}
+      p #{message.text}
+      p Posted by #{message.author.user_name} on #{message.date}
+    
+    else
+      li There are no messages.

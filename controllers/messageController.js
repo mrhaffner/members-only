@@ -4,7 +4,12 @@ const Message = require('../models/message');
 const User = require('../models/user');
 
 exports.index = function(req, res, next) {
-    res.render('index', { title: 'Members Only' });
+    Message.find({}, 'title text date author')
+        .populate('author')
+        .exec(function(err, list_messages) {
+            if (err) {return next(err); }
+            res.render('index', { title: 'Members Only', message_list: list_messages });
+        })
 };
 
 exports.create_get = function(req, res, next) {

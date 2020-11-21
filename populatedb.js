@@ -62,8 +62,8 @@ function createUsers(cb) {
 
 function createMessages(cb) {
   async.parallel([
-    (callback) => messageCreate('Eating from the Trash', 'I saw George eat an eclair straight out of the garbage can. Gross!', new Date(2020, 12, 17, 3, 24, 0), users[0], callback),
-    (callback) => messageCreate('Rumors', "I'm glad no one knows who I am with all these rumors I am creating.", new Date(2020, 2, 13, 6, 30, 10), users[2], callback),
+    (callback) => messageCreate('Eating from the Trash', 'I saw George eat an eclair straight out of the garbage can. Gross!', new Date(2019, 12, 17, 3, 24, 0), users[0], callback),
+    (callback) => messageCreate('Rumors', "I'm glad no one knows who I am with all these rumors I am creating.", new Date(2020, 2, 13, 6, 30, 10), users[0], callback),
     (callback) => messageCreate('Be Nice', 'I only say nice things about people', new Date(2020, 2, 16, 13, 33, 30), users[2], callback),
     (callback) => messageCreate("Stevesie", 'Stevesie you have too much time on your hands.  I know you can read who wrote this', new Date(2020, 3, 1, 20, 1, 0), users[1], callback),
     (callback) => messageCreate('Password', "The password to become a member is definitely not password. Don't even try it. You will not be able to see who wrote this message.", new Date(2020, 8, 7, 16, 44, 44), users[0], callback),

@@ -12,7 +12,7 @@ const UserSchema = new Schema({
 });
 
 UserSchema.virtual('name').get(function() {
-    return `this.firstName this.lastName`
+    return `${this.first_name} ${this.last_name}`
 });
 
 UserSchema.virtual('url').get(function() {
