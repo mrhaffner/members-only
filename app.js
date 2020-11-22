@@ -30,6 +30,22 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+passport.use(
+  new LocalStrategy((username, password, done) => {
+    User.findOne({ username: username }, (err, user) => {
+      if (err) { 
+        return done(err);
+      };
+      if (!user) {
+        return done(null, false, { msg: "Incorrect username" });
+      }
+      if (user.password !== password) {
+        return done(null, false, { msg: "Incorrect password" });
+      }
+      return done(null, user);
+    });
+  })
+);
 
 app.use(session({ secret: process.env.SECRET, resave: false, saveUninitialized: true }));
 app.use(passport.initialize());

@@ -4,7 +4,7 @@ const Message = require('../models/message');
 const User = require('../models/user');
 
 exports.login_get = function(req, res, next) {
-    res.send('NOT IMPLEMENTED');
+    res.render('log_in_form', { title: 'Please Login' });
 };
 
 exports.login_post = function(req, res, next) {
