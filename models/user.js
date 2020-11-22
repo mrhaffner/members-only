@@ -5,10 +5,10 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
         first_name: { type: String, required: true, maxlength: 15 },
         last_name: { type: String, required: true, maxlength: 20 },
-        user_name: { type: String, required: true, maxlength: 12 },
+        user_name: { type: String, required: true, maxlength: 12, unique: true },
         password: { type: String, required: true, minlength: 8, maxlength: 20 },
-        member_status: { type: Boolean, required: true },
-        admin_status: { type: Boolean },
+        member_status: { type: Boolean, required: true, default: false },
+        admin_status: { type: Boolean, default: false },
 });
 
 UserSchema.virtual('name').get(function() {

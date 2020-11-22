@@ -1,0 +1,29 @@
+extends layout
+
+block content
+
+    h1= title
+
+    form(method="POST" action='')
+        div
+            label(for='first_name') First Name:
+            input(type='text' name='first_name' placeholder='First Name')
+
+        div
+            label(for='last_name') Last Name:
+            input(type='text' name='last_name' placeholder='Last Name')
+        
+        div
+            label(for='user_name') Username:
+            input(type='text' name='user_name' placeholder='Username')
+
+        div
+            label(for='password') Password:
+            input(type='password' name='password' placeholder='Password')
+
+        button(type='submit') Sign Up
+
+    if errors
+        ul
+            for error in errors
+                li!= error.msg

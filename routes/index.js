@@ -5,13 +5,13 @@ const user_controller = require('../controllers/userController')
 
 router.get('/', msg_controller.index);
 
-router.get('/login', user_controller.login_get);
+router.get('/log-in', user_controller.login_get);
 
-router.post('/login', user_controller.login_post);
+router.post('/log-in', user_controller.login_post);
 
-router.get('/signup', user_controller.signup_get);
+router.get('/sign-up', user_controller.signup_get);
 
-router.post('/signup', user_controller.signup_post);
+router.post('/sign-up', user_controller.signup_post);
 
 router.get('/membership', user_controller.membership_get);
 
