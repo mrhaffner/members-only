@@ -7,7 +7,9 @@ router.get('/', msg_controller.index);
 
 router.get('/log-in', user_controller.login_get);
 
-router.post('/log-in', user_controller.login_post);
+//router.post('/log-in', user_controller.login_post);
+
+// router.post('/log-out', user_controller.logout_post)
 
 router.get('/sign-up', user_controller.signup_get);
 

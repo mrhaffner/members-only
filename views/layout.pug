@@ -4,4 +4,24 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
+    div
+      block sidebar
+        if user
+          ul
+            li
+              a(href='/') Home
+            li
+              a(href='/create') Create Message
+            li
+              a(href='/membership') Become Member
+            li
+              a(href='/log-out') Logout
+        else
+          ul
+            li
+              a(href='/') Home
+            li
+              a(href='/log-in') Login
+            li
+              a(href='/sign-up') Sign Up
     block content

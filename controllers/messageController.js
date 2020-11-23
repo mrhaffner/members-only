@@ -8,7 +8,7 @@ exports.index = function(req, res, next) {
         .populate('author')
         .exec(function(err, list_messages) {
             if (err) {return next(err); }
-            res.render('index', { title: 'Members Only', message_list: list_messages });
+            res.render('index', { title: 'Members Only', message_list: list_messages, user: req.user });
         })
 };
 

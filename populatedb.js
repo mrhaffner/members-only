@@ -25,8 +25,8 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 var users = []
 var messages = []
 
-function userCreate(first_name, last_name, user_name, password, member_status, admin_status, cb) {
-  const user = new User({first_name, last_name, user_name, password, member_status, admin_status});
+function userCreate(first_name, last_name, username, password, member_status, admin_status, cb) {
+  const user = new User({first_name, last_name, username, password, member_status, admin_status});
   user.save(function (err) {
     if (err) {
       cb(err, null)

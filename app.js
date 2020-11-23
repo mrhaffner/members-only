@@ -7,6 +7,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const User = require('./models/user');
 
 //CHANGE THIS and Install stuff
 //some of this stuff and elswhere might not need to be in here but other files
@@ -47,6 +48,16 @@ passport.use(
   })
 );
 
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
 app.use(session({ secret: process.env.SECRET, resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -56,6 +67,19 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 //app.use(compression()); //Compress all routes
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.post(
+  '/log-in',
+  passport.authenticate('local', {
+      successRedirect: '/',
+      failureRedirect: '/log-in',
+  })
+);
+
+app.get('/log-out', (req, res) => {
+  req.logout();
+  res.redirect('/');
+});
 
 app.use('/', indexRouter);
 
