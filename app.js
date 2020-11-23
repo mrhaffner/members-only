@@ -7,6 +7,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const bcrypt = require('bcryptjs');
 const User = require('./models/user');
 
 //CHANGE THIS and Install stuff
@@ -40,10 +41,15 @@ passport.use(
       if (!user) {
         return done(null, false, { msg: "Incorrect username" });
       }
-      if (user.password !== password) {
-        return done(null, false, { msg: "Incorrect password" });
-      }
-      return done(null, user);
+      bcrypt.compare(password, user.password, (err, res) => {
+          if (res) {
+            // passwords match! log user in
+            return done(null, user)
+          } else {
+            // passwords do not match!
+            return done(null, false, {msg: "Incorrect password"})
+          }
+      })
     });
   })
 );
@@ -67,6 +73,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 //app.use(compression()); //Compress all routes
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(function(req, res, next) {
+  res.locals.currentUser = req.user;
+  next();
+});
 
 app.post(
   '/log-in',

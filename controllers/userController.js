@@ -4,6 +4,8 @@ const passport = require('passport');
 const Message = require('../models/message');
 const User = require('../models/user');
 
+const bcrypt = require('bcryptjs');
+
 exports.login_get = function(req, res, next) {
     res.render('log_in_form', { title: 'Please Login' });
 };
@@ -27,26 +29,29 @@ exports.signup_post = [
     body('first_name', 'First name must be specified').trim().isLength({ max: 15 }).escape(),
     body('last_name', 'Last name must be specified').trim().isLength({ max: 20 }).escape(),
     body('username', 'User name must be specified').trim().isLength({ max: 12 }).escape(),
-    body('password', 'Password must be specified').trim().isLength({ min: 8, max: 20 }).escape(),
+    body('password', 'Password must be specified').trim().escape(),
     (req, res, next) => {
-        const errors = validationResult(req);
-        const user = new User(
-            {
-                first_name: req.body.first_name,
-                last_name: req.body.last_name,
-                username: req.body.username,
-                password: req.body.password,
+        bcrypt.hash(req.body.password, 10, (err, hashed) => {
+    
+            const errors = validationResult(req);
+            const user = new User(
+                {
+                    first_name: req.body.first_name,
+                    last_name: req.body.last_name,
+                    username: req.body.username,
+                    password: hashed,
+                }
+            );
+            if (!errors.isEmpty()) {
+                res.render('sign_up_form', { title: 'Sign Up Form', errors: errors.array(), user: user})
+                return;
+            } else {
+                user.save(function (err) {
+                    if (err) { return next(err); }
+                    res.redirect('/')
+                });
             }
-        );
-        if (!errors.isEmpty()) {
-            res.render('sign_up_form', { title: 'Sign Up Form', errors: errors.array(), user: user})
-            return;
-        } else {
-            user.save(function (err) {
-                if (err) { return next(err); }
-                res.redirect('/')
-            });
-        }
+        })
     }
 ];
 
