@@ -1,5 +1,4 @@
-//const { body, validationResult } = require('express-validator')
-//probably need to install this - do I need it?
+const { body, validationResult } = require('express-validator')
 const Message = require('../models/message');
 const User = require('../models/user');
 
@@ -16,9 +15,28 @@ exports.create_get = function(req, res, next) {
     res.render('message_form', { title: 'Create New Message', user: req.user})
 };
 
-exports.create_post = function(req, res, next) {
-    res.send('NOT IMPLEMENTED');
-};
+exports.create_post = [
+    body('title', 'Title must be specified').trim().isLength({ min: 1 }).escape(),
+    body('text', 'Text must be specified').trim().isLength({ min: 1 }).escape(),
+    (req, res, next) => {
+        const errors = validationResult(req);
+        const message = new Message(
+            {
+                title: req.body.text,
+                text: req.body.text,
+                author: req.user
+            }
+        );
+        if (!errors.isEmpty()) {
+            res.render('message_form', { title: 'Create New Message', user: req.user, errors: errors.array(), message: message })
+        } else {
+            message.save(function (err) {
+                if (err) { return next(err); }
+                res.redirect('/')
+            })
+        }
+    }
+]
 
 exports.delete_get = function(req, res, next) {
     res.send('NOT IMPLEMENTED');
