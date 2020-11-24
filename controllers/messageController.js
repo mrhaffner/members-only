@@ -13,7 +13,7 @@ exports.index = function(req, res, next) {
 };
 
 exports.create_get = function(req, res, next) {
-    res.send('NOT IMPLEMENTED');
+    res.render('message_form', { title: 'Create New Message', user: req.user})
 };
 
 exports.create_post = function(req, res, next) {

@@ -1,0 +1,16 @@
+extends layout
+
+block content
+
+    h1= title
+
+    form(method='POST' action='')
+        div
+            label(for='title') Message Title:
+            input(type='text' placeholder='Title' name='title')
+        div
+            label(for='text') Message Text:
+            input(type='text' placeholder='Text' name='text')
+
+        button(type='submit') Submit Message
+
