@@ -56,9 +56,32 @@ exports.signup_post = [
 ];
 
 exports.membership_get = function(req, res, next) {
-    res.send('NOT IMPLEMENTED');
+    res.render('membership', { user: req.user})
 };
 
-exports.membership_post = function(req, res, next) {
-    res.send('NOT IMPLEMENTED');
-};
+exports.membership_post = [
+    body('member_status', 'Cannot be empty').isLength({ min: 1 }).escape(),
+    function(req, res, next) {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            res.render('sign_up_form', { title: 'Sign Up Form', errors: errors.array(), user: user})
+            return;
+        } else if (req.body.member_status === 'password') {
+            User.findByIdAndUpdate(res.locals.currentUser.id, { member_status: true },
+                (err, data) => {
+                    if (err) { return next(err); }
+                    console.log(data, res.locals.currentUser.username)
+                    res.redirect('/')
+                }
+            )
+        } else if (req.body.member_status === 'penultimate') {
+            User.findByIdAndUpdate(res.locals.currentUser.id, { admin_status: true, member_status: true },
+                (err, data) => {
+                    if (err) { return next(err); }
+                    console.log(data, res.locals.currentUser.username)
+                    res.redirect('/')
+                }
+            )
+        }
+    }
+]
