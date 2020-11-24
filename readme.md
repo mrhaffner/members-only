@@ -3,3 +3,5 @@ This is the Members Only assignment from The Odin Project.  The purpose of this 
 The project needs to be styled and pages need to properly redirect for users who are not logged if they enter a URL manually.
 
 See the project on Heroku:
+
+https://safe-sands-34399.herokuapp.com/
