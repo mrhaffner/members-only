@@ -8,7 +8,9 @@ block content
     each message in message_list
       h3 #{message.title}
       p #{message.text}
-      p Posted by #{message.author.username} on #{message.date}
+      if user
+        if user.member_status === true
+          p Posted by #{message.author.username} on #{message.date}
     
     else
       li There are no messages.
