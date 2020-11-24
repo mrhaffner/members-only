@@ -1,4 +1,5 @@
-const { body, validationResult } = require('express-validator')
+const { body, validationResult } = require('express-validator');
+const message = require('../models/message');
 const Message = require('../models/message');
 const User = require('../models/user');
 
@@ -38,10 +39,9 @@ exports.create_post = [
     }
 ]
 
-exports.delete_get = function(req, res, next) {
-    res.send('NOT IMPLEMENTED');
-};
-
 exports.delete_post = function(req, res, next) {
-    res.send('NOT IMPLEMENTED');
+    Message.findByIdAndRemove(req.body.id, function deleteItem(err) {
+        if (err) { return next(err); }
+        res.redirect('/')
+    })
 };

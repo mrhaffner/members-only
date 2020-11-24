@@ -1,7 +1,4 @@
 const { body, validationResult } = require('express-validator');
-const passport = require('passport');
-
-const Message = require('../models/message');
 const User = require('../models/user');
 
 const bcrypt = require('bcryptjs');
@@ -9,17 +6,6 @@ const bcrypt = require('bcryptjs');
 exports.login_get = function(req, res, next) {
     res.render('log_in_form', { title: 'Please Login' });
 };
-
-// exports.login_post = function(req, res, next) {
-//     passport.authenticate('local', {
-//         successRedirect: '/',
-//         failureRedirect: '/log-in'
-//     })
-// };
-
-// exports.logout_post = function(req, res, next) {
-//     res.send('NOT IMPLEMENTED');
-// }
 
 exports.signup_get = function(req, res, next) {
     res.render('sign_up_form', { title: 'Sign Up Form' });

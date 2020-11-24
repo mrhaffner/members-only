@@ -7,10 +7,6 @@ router.get('/', msg_controller.index);
 
 router.get('/log-in', user_controller.login_get);
 
-//router.post('/log-in', user_controller.login_post);
-
-// router.post('/log-out', user_controller.logout_post)
-
 router.get('/sign-up', user_controller.signup_get);
 
 router.post('/sign-up', user_controller.signup_post);
@@ -23,8 +19,6 @@ router.get('/create', msg_controller.create_get);
 
 router.post('/create', msg_controller.create_post);
 
-router.get('/message/:id/delete', msg_controller.delete_get);
-
-router.post('/message/:id/delete', msg_controller.delete_post);
+router.post('/delete', msg_controller.delete_post);
 
 module.exports = router;

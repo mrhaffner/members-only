@@ -11,6 +11,11 @@ block content
       if user
         if user.member_status === true
           p Posted by #{message.author.username} on #{message.date}
+        if user.admin_status === true
+          form(method='POST' action='/delete')
+            div
+              input(type='hidden', name='id', required='true', value=message._id)
+            button(type='submit') Delete Message
     
     else
       li There are no messages.
