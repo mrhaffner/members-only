@@ -11,14 +11,13 @@ const bcrypt = require('bcryptjs');
 const User = require('./models/user');
 
 //CHANGE THIS and Install stuff
-//some of this stuff and elswhere might not need to be in here but other files
 const indexRouter = require('./routes/index');
 
-//const compression = require('compression');
-//const helmet = require('helmet');
+const compression = require('compression');
+const helmet = require('helmet');
 
 const app = express();
-//app.use(helmet());
+app.use(helmet());
 
 //Set up mongoose connection
 const mongoose = require('mongoose');
@@ -71,7 +70,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-//app.use(compression()); //Compress all routes
+app.use(compression()); //Compress all routes
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req, res, next) {
