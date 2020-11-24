@@ -70,7 +70,6 @@ exports.membership_post = [
             User.findByIdAndUpdate(res.locals.currentUser.id, { member_status: true },
                 (err, data) => {
                     if (err) { return next(err); }
-                    console.log(data, res.locals.currentUser.username)
                     res.redirect('/')
                 }
             )
@@ -78,10 +77,11 @@ exports.membership_post = [
             User.findByIdAndUpdate(res.locals.currentUser.id, { admin_status: true, member_status: true },
                 (err, data) => {
                     if (err) { return next(err); }
-                    console.log(data, res.locals.currentUser.username)
                     res.redirect('/')
                 }
             )
+        } else {
+            res.redirect('/')
         }
     }
 ]
