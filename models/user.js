@@ -15,9 +15,4 @@ UserSchema.virtual('name').get(function() {
     return `${this.first_name} ${this.last_name}`
 });
 
-UserSchema.virtual('url').get(function() {
-    //UPDATE ROUTE
-    return `/blah/user${this.id}`
-});
-
 module.exports = mongoose.model('User', UserSchema);
